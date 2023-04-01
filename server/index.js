@@ -1,8 +1,19 @@
-
+require('dotenv').config( )
 const express = require('express')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+
+// external functions
 const { errorHandler, notFound } = require('./handlers')
+// database
+const database = require('./models')
+
+
+//main application
+
 const app = express()
-const port = 3000
+const port = process.env.PORT
+
 
 app.get('/', (req, res) => {
   res.json({hello:'Hello World!'})
