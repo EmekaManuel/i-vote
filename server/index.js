@@ -1,28 +1,31 @@
-require('dotenv').config( )
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const routes = require("./routes");
+/////////////////////////////////////////////////////////
 
-// external functions
-const { errorHandler, notFound } = require('./handlers')
-// database
-const database = require('./models')
-
+const { errors, notFound } = require("./handlers");
+const db = require("./models");
 
 //main application
+const app = express();
+const port = process.env.PORT;
 
-const app = express()
-const port = process.env.PORT
+app.use(cors());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use("/api/auth", routes.auth);
 
+app.get("/", (req, res) => {
+  res.json({ hello: "Hello World!" });
+});
 
-app.get('/', (req, res) => {
-  res.json({hello:'Hello World!'})
-})
-
-app.use(notFound)
-
-app.use(errorHandler)
+app.use(notFound);
+app.use(errors);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(` app listening on port ${port}`);
+});
