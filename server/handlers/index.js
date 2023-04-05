@@ -12,7 +12,7 @@ module.exports.notFound = (req, res, next) => {
 };
 
 module.exports.errors = (error, req, res, next) => {
-  res.status(error.status || 500).json({
+  res.status(error.status || 400).json({
     error: error.message || "something went wrong",
   });
 };
