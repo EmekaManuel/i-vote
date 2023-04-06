@@ -17,11 +17,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use("/api/auth", routes.auth);
 
 app.get("/", (req, res) => {
   res.json({ hello: "Hello World!" });
 });
+app.use("/api/auth", routes.auth);
+app.use('/api/polls', routes.poll)
+
+
 
 app.use(notFound);
 app.use(errors);
