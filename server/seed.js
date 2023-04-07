@@ -24,10 +24,10 @@ const polls = [
 
 const seed = async () => {
   try {
-    await db.User.remove();
+    await db.User.deleteMany();
     console.log('DROP ALL USERS');
 
-    await db.Poll.remove();
+    await db.Poll.deleteMany();
     console.log('DROP ALL POLLS');
 
     await Promise.all(
